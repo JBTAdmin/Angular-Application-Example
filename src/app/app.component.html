@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+  <div fxFlex="row">
+    <ul fxLayoutGap="10px" class="navigation-items">
+      <li>
+        <a>LOGO</a>
+      </li>
+      &nbsp;&nbsp;
+      <li>
+        <button mat-stroked-button routerLink="" >
+          List Product
+        </button>
+      </li>
+      &nbsp;&nbsp;
+      <li>
+        <button mat-stroked-button routerLink="0/edit" >
+          Add Product
+        </button>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>
+<div *ngIf="loading$ | async">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<router-outlet></router-outlet>

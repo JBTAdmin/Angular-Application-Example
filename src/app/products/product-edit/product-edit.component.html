@@ -1,0 +1,100 @@
+<mat-card fxFlex class="example-card">
+  <mat-card-header>
+    {{ pageTitle }}
+  </mat-card-header>
+
+  <mat-card-content *ngIf="product">
+    <form novalidate [formGroup]="productForm">
+      <div fxLayout="column">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Product Name"
+            formControlName="productName"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Product Code"
+            formControlName="productCode"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="Description"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            placeholder="Price"
+            formControlName="price"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            placeholder="Quantity In Stock"
+            formControlName="quantityInStock"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Supplier</mat-label>
+          <mat-select formControlName="supplier">
+            <mat-option
+              *ngFor="let supplier of productSuppliers"
+              [value]="supplier.id"
+            >
+              {{ supplier.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-label>Category</mat-label>
+        <mat-radio-group
+          color="primary"
+          name="category"
+          fxLayoutGap="10px"
+          formControlName="category"
+        >
+          <mat-radio-button
+            *ngFor="let category of productCategories"
+            [value]="category.name"
+          >
+            {{ category.name }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      (click)="saveProduct()"
+      [disabled]="!productForm?.valid"
+    >
+      SAVE
+    </button>
+
+    <button
+      type="button"
+      mat-raised-button
+      color="warn"
+      (click)="deleteProduct()"
+    >
+      DELETE
+    </button>
+    <button type="button" mat-raised-button [routerLink]="['']">CANCEL</button>
+  </mat-card-actions>
+</mat-card>

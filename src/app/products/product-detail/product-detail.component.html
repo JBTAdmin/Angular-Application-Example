@@ -1,0 +1,71 @@
+<mat-card fxFlex class="example-card">
+  <mat-card-header color="primary" fxLayout="row" fxLayoutAlign="center center">
+    <h3 class="detail-header">{{ pageTitle }}</h3>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
+        <h4 fxFlex="10">Product Name</h4>
+        <p fxFlex="90">{{ product.productName }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
+        <h4 fxFlex="10">Product Code</h4>
+        <p fxFlex="90">{{ product.productCode }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
+        <h4 fxFlex="10">Product Description</h4>
+        <p fxFlex="90">{{ product.description }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
+        <h4 fxFlex="10">Product Price</h4>
+        <p fxFlex="90">{{ product.price | currency }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
+        <h4 fxFlex="10">Quantity In Stock</h4>
+        <p fxFlex="90">{{ product.quantityInStock | currency }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
+        <h4 fxFlex="10">Supplier</h4>
+        <p fxFlex="90">{{ product.supplier }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
+        <h4 fxFlex="10">Category</h4>
+        <p fxFlex="90">{{ product.category }}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      [routerLink]="['edit']"
+    >
+      EDIT
+    </button>
+
+    <button
+      type="button"
+      mat-raised-button
+      color="warn"
+      (click)="deleteProduct()"
+    >
+      DELETE
+    </button>
+    <button type="button" mat-raised-button [routerLink]="['']">CANCEL</button>
+  </mat-card-actions>
+</mat-card>
