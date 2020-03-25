@@ -17,11 +17,9 @@ export class AppComponent {
   constructor(
     public spinnerService: SpinnerService,
     private translate: TranslateService
-  ) {}
-
-  ngOnInit(): void {
-    this.translate.setDefaultLang(this.language);
-    this.onLanguageChange();
+  ) {
+    translate.setDefaultLang(this.language);
+    translate.use(this.language);
   }
 
   onLanguageChange() {
