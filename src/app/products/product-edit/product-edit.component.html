@@ -1,6 +1,6 @@
 <mat-card class="example-card">
   <mat-card-header>
-    {{ pageTitle }}
+    {{ displayTitle }}
   </mat-card-header>
 
   <mat-card-content *ngIf="product">
@@ -9,7 +9,7 @@
         <mat-form-field>
           <input
             matInput
-            placeholder="Product Name"
+            placeholder="{{ 'PRODUCT.NAME' | translate }}"
             formControlName="productName"
           />
         </mat-form-field>
@@ -17,7 +17,7 @@
         <mat-form-field>
           <input
             matInput
-            placeholder="Product Code"
+            placeholder="{{ 'PRODUCT.CODE' | translate }}"
             formControlName="productCode"
           />
         </mat-form-field>
@@ -25,7 +25,7 @@
         <mat-form-field>
           <textarea
             matInput
-            placeholder="Description"
+            placeholder="{{ 'PRODUCT.DESCRIPTION' | translate }}"
             formControlName="description"
           ></textarea>
         </mat-form-field>
@@ -33,7 +33,7 @@
           <input
             matInput
             type="number"
-            placeholder="Price"
+            placeholder="{{ 'PRODUCT.PRICE' | translate }}"
             formControlName="price"
           />
         </mat-form-field>
@@ -42,13 +42,13 @@
           <input
             matInput
             type="number"
-            placeholder="Quantity In Stock"
+            placeholder="{{ 'PRODUCT.QTY_IN_STOCK' | translate }}"
             formControlName="quantityInStock"
           />
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Supplier</mat-label>
+          <mat-label>{{ "PRODUCT.SUPPLIER" | translate }}</mat-label>
           <mat-select formControlName="supplier">
             <mat-option
               *ngFor="let supplier of productSuppliers"
@@ -59,7 +59,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-label>Category</mat-label>
+        <mat-label>{{ "PRODUCT.CATEGORY" | translate }}</mat-label>
         <mat-radio-group
           color="primary"
           name="category"
@@ -78,7 +78,7 @@
           <input
             matInput
             type="text"
-            placeholder="Tags"
+            placeholder="{{ 'PRODUCT.TAGS' | translate }}"
             [matChipInputFor]="tagChipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             [matChipInputAddOnBlur]="addOnBlur"
@@ -99,7 +99,7 @@
         </mat-chip-list>
 
         <mat-checkbox color="primary" formControlName="sendCatalog">
-          Send Catalog
+          {{ "PRODUCT.CATALOG" | translate }}
         </mat-checkbox>
       </div>
     </form>
@@ -112,7 +112,7 @@
       (click)="saveProduct()"
       [disabled]="!productForm?.valid"
     >
-      SAVE
+      {{ "PRODUCT.SAVE" | translate }}
     </button>
 
     <button
@@ -121,8 +121,10 @@
       color="warn"
       (click)="deleteProduct()"
     >
-      DELETE
+      {{ "PRODUCT.DELETE" | translate }}
     </button>
-    <button type="button" mat-raised-button [routerLink]="['']">CANCEL</button>
+    <button type="button" mat-raised-button [routerLink]="['']">
+      {{ "PRODUCT.CANCEL" | translate }}
+    </button>
   </mat-card-actions>
 </mat-card>

@@ -1,5 +1,7 @@
-import { Component, Output, EventEmitter } from "@angular/core";
+import { Component } from "@angular/core";
 import { SpinnerService } from "./services/spinner.service";
+import { LANGUAGE } from "./interfaces/language.interface";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-root",
@@ -9,6 +11,18 @@ import { SpinnerService } from "./services/spinner.service";
 export class AppComponent {
   title = "Angular-Application-Example";
   loading$ = this.spinnerService.isLoading;
+  languages = LANGUAGE;
+  language = LANGUAGE[0].code;
 
-  constructor(public spinnerService: SpinnerService) {}
+  constructor(
+    public spinnerService: SpinnerService,
+    private translate: TranslateService
+  ) {
+    this.translate.setDefaultLang(this.language);
+    this.onLanguageChange();
+  }
+
+  onLanguageChange() {
+    this.translate.use(this.language);
+  }
 }

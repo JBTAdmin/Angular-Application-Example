@@ -1,63 +1,65 @@
 <mat-card class="example-card">
   <mat-card-header color="primary" fxLayout="row" fxLayoutAlign="center center">
-    <h3 class="detail-header">{{ pageTitle }}</h3>
+    <h3 class="detail-header">
+      {{ ('PRODUCT.DETAIL' | translate) + pageTitle }}
+    </h3>
   </mat-card-header>
 
   <mat-card-content>
     <mat-list>
       <mat-list-item>
         <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
-        <h4 fxFlex="50">Product Name</h4>
+        <h4 fxFlex="50">{{ "PRODUCT.NAME" | translate }}</h4>
         <p fxFlex="50">{{ product.productName }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
-        <h4 fxFlex="50">Product Code</h4>
+        <h4 fxFlex="50">{{ "PRODUCT.CODE" | translate }}</h4>
         <p fxFlex="50">{{ product.productCode }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
-        <h4 fxFlex="50">Product Description</h4>
+        <h4 fxFlex="50">{{ "PRODUCT.DESCRIPTION" | translate }}</h4>
         <p fxFlex="50">{{ product.description }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
-        <h4 fxFlex="50">Product Price</h4>
+        <h4 fxFlex="50">{{ "PRODUCT.PRICE" | translate }}</h4>
         <p fxFlex="50">{{ product.price | currency }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
-        <h4 fxFlex="50">Quantity In Stock</h4>
+        <h4 fxFlex="50">{{ "PRODUCT.QTY_IN_STOCK" | translate }}</h4>
         <p fxFlex="50">{{ product.quantityInStock | currency }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
-        <h4 fxFlex="50">Supplier</h4>
+        <h4 fxFlex="50">{{ "PRODUCT.SUPPLIER" | translate }}</h4>
         <p fxFlex="50">{{ product.supplier }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
-        <h4 fxFlex="50">Category</h4>
+        <h4 fxFlex="50">{{ "PRODUCT.CATEGORY" | translate }}</h4>
         <p fxFlex="50">{{ product.category }}</p>
       </mat-list-item>
-
+      <mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
-        <h4 fxFlex="50">Tags</h4>
+        <h4 fxFlex="50">{{ "PRODUCT.TAGS" | translate }}</h4>
         <mat-chip-list aria-label="Tags">
           <mat-chip *ngFor="let tag of product.tags || []">{{ tag }}</mat-chip>
         </mat-chip-list>
       </mat-list-item>
-
+<mat-divider></mat-divider>
       <mat-list-item>
         <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
-        <h4 fxFlex="50">Send Catalog</h4>
+        <h4 fxFlex="50">{{ "PRODUCT.CATALOG" | translate }}</h4>
         <p fxFlex="50">{{ product.sendCatalog }}</p>
       </mat-list-item>
     </mat-list>
@@ -69,7 +71,7 @@
       color="primary"
       [routerLink]="['edit']"
     >
-      EDIT
+      {{ "PRODUCT.EDIT" | translate }}
     </button>
 
     <button
@@ -78,8 +80,10 @@
       color="warn"
       (click)="deleteProduct()"
     >
-      DELETE
+      {{ "PRODUCT.DELETE" | translate }}
     </button>
-    <button type="button" mat-raised-button [routerLink]="['']">CANCEL</button>
+    <button type="button" mat-raised-button [routerLink]="['']">
+      {{ "PRODUCT.CANCEL" | translate }}
+    </button>
   </mat-card-actions>
 </mat-card>

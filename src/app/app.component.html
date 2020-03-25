@@ -1,26 +1,41 @@
 <mat-toolbar color="primary">
-  <div fxFlex="row">
-    <ul fxLayoutGap="10px" class="navigation-items">
+  <div fxFlex="80">
+    <ul fxFlex="row" fxLayoutGap="22px" class="navigation-items">
       <li>
         <a>LOGO</a>
       </li>
-      &nbsp;&nbsp;
+
       <li>
-        <button mat-stroked-button routerLink="" >
-          List Product
+        <button mat-stroked-button routerLink="">
+          {{ "PRODUCT.LIST" | translate }}
         </button>
       </li>
-      &nbsp;&nbsp;
+
       <li>
-        <button mat-stroked-button routerLink="0/edit" >
-          Add Product
+        <button mat-stroked-button routerLink="0/edit">
+          {{ "PRODUCT.ADD" | translate }}
         </button>
       </li>
     </ul>
   </div>
+  <div fxFlex="20">
+    <div class="lang-select">
+      <mat-form-field>
+        <mat-select
+          [(ngModel)]="language"
+          (selectionChange)="onLanguageChange()">
+          <mat-option
+            *ngFor="let language of languages"
+            [value]="language.code">
+            {{ "LANGUAGE." + language.name | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
 </mat-toolbar>
 <div *ngIf="loading$ | async">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
 <router-outlet></router-outlet>

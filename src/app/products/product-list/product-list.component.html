@@ -1,40 +1,55 @@
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="products"  class="example-table" 
-    matSort matSortActive="productName" matSortDisableClear matSortDirection="asc" >
-  
-      <!-- ID Column -->
-      <ng-container matColumnDef="productCode">
-        <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let row">           
-           <a [routerLink]="[row.id]">
-              {{ row.productCode }}
-            </a>
-          </td>
-      </ng-container>
-  
-      <!-- Progress Column -->
-      <ng-container matColumnDef="productName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Product Name </th>
-        <td mat-cell *matCellDef="let row"> {{row.productName}} </td>
-      </ng-container>
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Price </th>
-        <td mat-cell *matCellDef="let row"> {{row.price | currency}} </td>
-      </ng-container>
-  
-      <!-- Color Column -->
-      <ng-container matColumnDef="quantityInStock">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Quantity In Stock </th>
-        <td mat-cell *matCellDef="let row"> {{row.quantityInStock | currency}} </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-      </tr>
-    </table>
-  
-    <mat-paginator [length]="totalCount" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  </div>
-  
+  <table
+    mat-table
+    [dataSource]="products"
+    class="example-table"
+    matSort
+    matSortActive="productName"
+    matSortDisableClear
+    matSortDirection="asc"
+  >
+    <!-- ID Column -->
+    <ng-container matColumnDef="productCode">
+      <th mat-header-cell *matHeaderCellDef>{{ "PRODUCT.ID" | translate }}</th>
+      <td mat-cell *matCellDef="let row">
+        <a [routerLink]="[row.id]">
+          {{ row.productCode }}
+        </a>
+      </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+        {{ "PRODUCT.NAME" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.productName }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+        {{ "PRODUCT.PRICE" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.price | currency }}</td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="quantityInStock">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+        {{ "PRODUCT.QTY_IN_STOCK" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.quantityInStock | currency }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalCount"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+  ></mat-paginator>
+</div>

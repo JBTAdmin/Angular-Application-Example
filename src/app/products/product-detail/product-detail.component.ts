@@ -8,13 +8,15 @@ import {
   Confirmation,
   ConfirmationDialogComponent
 } from "../../utitlity/confirmation/confirmation.component";
+import { TranslateService } from "@ngx-translate/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   templateUrl: "./product-detail.component.html",
   styleUrls: ["./product-detail.component.scss"]
 })
 export class ProductDetailComponent {
-  pageTitle = "Product Detail";
+  pageTitle = "PRODUCT.DETAIL";
   product: Product;
 
   constructor(
@@ -22,7 +24,9 @@ export class ProductDetailComponent {
     private productService: ProductService,
     private spinnerService: SpinnerService,
     private router: Router,
-    public dialog: MatDialog
+    private translate: TranslateService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -32,9 +36,9 @@ export class ProductDetailComponent {
 
     // Display the appropriate page header
     if (this.product) {
-      this.pageTitle = `Product Detail: ${this.product.productName}`;
+      this.pageTitle = `: ${this.product.productName}`;
     } else {
-      this.pageTitle = "No product found";
+      this.pageTitle = this.translate.instant("PRODUCT.NOT_FOUND");
     }
   }
 
@@ -47,14 +51,22 @@ export class ProductDetailComponent {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         width: "250px",
         data: {
-          message: `Really delete the product: ${this.product.productName}?`
+          message:
+            this.translate.instant("PRODUCT.DELETE.CONFIRMATION") +
+            `: ${this.product.productName}?`
         } as Confirmation
       });
       this.spinnerService.setLoader(true);
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.productService.deleteProduct(this.product.id).subscribe({
-            next: () => this.onSaveComplete(),
+            next: () => {
+              const deleteConfirmation = this.translate.instant(
+                "PRODUCT.DELETED"
+              );
+              this.snackBar.open(deleteConfirmation, null, { duration: 2000 });
+              this.onSaveComplete();
+            },
             error: err => console.log(err)
           });
         } else {

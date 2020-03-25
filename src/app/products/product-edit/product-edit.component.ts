@@ -13,6 +13,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   templateUrl: "./product-edit.component.html",
@@ -36,6 +37,7 @@ export class ProductEditComponent {
     private productService: ProductService,
     private spinnerService: SpinnerService,
     private snackBar: MatSnackBar,
+    private translate: TranslateService,
     public dialog: MatDialog
   ) {}
 
@@ -98,11 +100,14 @@ export class ProductEditComponent {
     }
   }
 
-  displayTitle(): void {
+  get displayTitle() {
     if (this.product.id === 0) {
-      this.pageTitle = "Add Product";
+      return this.translate.instant("PRODUCT.ADD");
     } else {
-      this.pageTitle = `Edit Product: ${this.product.productName}`;
+      return (
+        this.translate.instant("PRODUCT.EDIT_DETAIL") +
+        `: ${this.product.productName}`
+      );
     }
   }
 
@@ -115,7 +120,9 @@ export class ProductEditComponent {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         width: "250px",
         data: {
-          message: `Really delete the product: ${this.product.productName}?`
+          message:
+            this.translate.instant("PRODUCT.DELETE.CONFIRMATION") +
+            `: ${this.product.productName}?`
         } as Confirmation
       });
       this.spinnerService.setLoader(true);
@@ -123,7 +130,10 @@ export class ProductEditComponent {
         if (result) {
           this.productService.deleteProduct(this.product.id).subscribe({
             next: () => {
-              this.snackBar.open("Product Deleted.", null, { duration: 2000 });
+              const deleteConfirmation = this.translate.instant(
+                "PRODUCT.DELETED"
+              );
+              this.snackBar.open(deleteConfirmation, null, { duration: 2000 });
               this.onSaveComplete();
             },
             error: err => console.log(err)
@@ -143,7 +153,8 @@ export class ProductEditComponent {
         if (p.id === 0) {
           this.productService.createProduct(p).subscribe({
             next: () => {
-              this.snackBar.open("Product Created.", null, { duration: 2000 });
+              const productCreated = this.translate.instant("PRODUCT.SAVED");
+              this.snackBar.open(productCreated, null, { duration: 2000 });
               this.onSaveComplete();
             },
             error: err => console.log(err)
@@ -151,7 +162,8 @@ export class ProductEditComponent {
         } else {
           this.productService.updateProduct(p).subscribe({
             next: () => {
-              this.snackBar.open("Product Updated.", null, { duration: 2000 });
+              const productUpdated = this.translate.instant("PRODUCT.UPDATED");
+              this.snackBar.open(productUpdated, null, { duration: 2000 });
               this.onSaveComplete();
             },
             error: err => console.log(err)

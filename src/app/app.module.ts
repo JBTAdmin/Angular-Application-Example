@@ -1,10 +1,15 @@
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { InMemoryWebApiModule } from "angular-in-memory-web-api";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import {
+  TranslateModule,
+  TranslateLoader  
+} from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { MatMaterialModule } from "./mat-material.module";
@@ -14,6 +19,11 @@ import { ProductListComponent } from "./products/product-list/product-list.compo
 import { ProductDetailComponent } from "./products/product-detail/product-detail.component";
 import { ProductEditComponent } from "./products/product-edit/product-edit.component";
 import { ConfirmationDialogComponent } from "./utitlity/confirmation/confirmation.component";
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -27,12 +37,23 @@ import { ConfirmationDialogComponent } from "./utitlity/confirmation/confirmatio
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    FormsModule,
     HttpClientModule,
     FlexLayoutModule.withConfig({}),
     ReactiveFormsModule,
     AppRoutingModule,
     MatMaterialModule,
-    InMemoryWebApiModule.forRoot(AppData, { delay: 1000 })
+    InMemoryWebApiModule.forRoot(AppData, {
+      passThruUnknownUrl: true,
+      delay: 1000
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
