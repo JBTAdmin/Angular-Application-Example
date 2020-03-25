@@ -1,4 +1,4 @@
-<mat-card fxFlex class="example-card">
+<mat-card class="example-card">
   <mat-card-header color="primary" fxLayout="row" fxLayoutAlign="center center">
     <h3 class="detail-header">{{ pageTitle }}</h3>
   </mat-card-header>
@@ -6,45 +6,59 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item>
-        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
-        <h4 fxFlex="10">Product Name</h4>
-        <p fxFlex="90">{{ product.productName }}</p>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">Product Name</h4>
+        <p fxFlex="50">{{ product.productName }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
-        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
-        <h4 fxFlex="10">Product Code</h4>
-        <p fxFlex="90">{{ product.productCode }}</p>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">Product Code</h4>
+        <p fxFlex="50">{{ product.productCode }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
-        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
-        <h4 fxFlex="10">Product Description</h4>
-        <p fxFlex="90">{{ product.description }}</p>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">Product Description</h4>
+        <p fxFlex="50">{{ product.description }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
-        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
-        <h4 fxFlex="10">Product Price</h4>
-        <p fxFlex="90">{{ product.price | currency }}</p>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">Product Price</h4>
+        <p fxFlex="50">{{ product.price | currency }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
-        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
-        <h4 fxFlex="10">Quantity In Stock</h4>
-        <p fxFlex="90">{{ product.quantityInStock | currency }}</p>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">Quantity In Stock</h4>
+        <p fxFlex="50">{{ product.quantityInStock | currency }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
-        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
-        <h4 fxFlex="10">Supplier</h4>
-        <p fxFlex="90">{{ product.supplier }}</p>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">Supplier</h4>
+        <p fxFlex="50">{{ product.supplier }}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
-        <mat-icon color="primary" mat-list-icon>bookmark</mat-icon>
-        <h4 fxFlex="10">Category</h4>
-        <p fxFlex="90">{{ product.category }}</p>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">Category</h4>
+        <p fxFlex="50">{{ product.category }}</p>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">Tags</h4>
+        <mat-chip-list aria-label="Tags">
+          <mat-chip *ngFor="let tag of product.tags || []">{{ tag }}</mat-chip>
+        </mat-chip-list>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">Send Catalog</h4>
+        <p fxFlex="50">{{ product.sendCatalog }}</p>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

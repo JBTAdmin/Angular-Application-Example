@@ -32,7 +32,7 @@ import { ConfirmationDialogComponent } from "./utitlity/confirmation/confirmatio
     ReactiveFormsModule,
     AppRoutingModule,
     MatMaterialModule,
-    InMemoryWebApiModule.forRoot(AppData, { delay: 2000 })
+    InMemoryWebApiModule.forRoot(AppData, { delay: 1000 })
   ],
   providers: [],
   bootstrap: [AppComponent]

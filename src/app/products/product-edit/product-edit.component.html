@@ -1,4 +1,4 @@
-<mat-card fxFlex class="example-card">
+<mat-card class="example-card">
   <mat-card-header>
     {{ pageTitle }}
   </mat-card-header>
@@ -73,6 +73,34 @@
             {{ category.name }}
           </mat-radio-button>
         </mat-radio-group>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            placeholder="Tags"
+            [matChipInputFor]="tagChipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addTag($event)"
+          />
+        </mat-form-field>
+
+        <mat-chip-list #tagChipList aria-label="Tag selection">
+          <mat-chip
+            *ngFor="let tag of productForm.get('tags').value"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(tag)"
+          >
+            {{ tag }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+
+        <mat-checkbox color="primary" formControlName="sendCatalog">
+          Send Catalog
+        </mat-checkbox>
       </div>
     </form>
   </mat-card-content>

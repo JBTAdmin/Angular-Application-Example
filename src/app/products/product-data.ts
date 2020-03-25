@@ -16,6 +16,8 @@ export class ProductData {
       price: 19.95,
       category: Categories.Gaming,
       quantityInStock: 15,
+      tags: ["rake", "leaf", "yard", "home"],
+      sendCatalog: false,
       supplier: 1
     },
     {
@@ -26,6 +28,8 @@ export class ProductData {
       price: 32.99,
       category: Categories.Gaming,
       quantityInStock: 2,
+      tags: ["tools", "hammer", "construction"],
+      sendCatalog: false,
       supplier: 1
     },
     {
@@ -36,6 +40,7 @@ export class ProductData {
       price: 8.9,
       category: Categories.Gaming,
       quantityInStock: 8,
+      sendCatalog: false,
       supplier: 1
     },
     {
@@ -45,6 +50,7 @@ export class ProductData {
       description: "15-inch steel blade hand saw",
       price: 11.55,
       category: Categories.Gaming,
+      sendCatalog: false,
       quantityInStock: 6,
       supplier: 1
     },
@@ -55,6 +61,7 @@ export class ProductData {
       description: "Standard two-button video game controller",
       price: 35.95,
       category: Categories.Gaming,
+      sendCatalog: false,
       quantityInStock: 12,
       supplier: 1
     }

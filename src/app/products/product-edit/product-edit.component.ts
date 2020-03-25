@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProductService } from "../product.service";
 import { Product } from "../product";
@@ -10,6 +10,9 @@ import {
   Confirmation
 } from "src/app/utitlity/confirmation/confirmation.component";
 import { MatDialog } from "@angular/material/dialog";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   templateUrl: "./product-edit.component.html",
@@ -21,6 +24,10 @@ export class ProductEditComponent {
   product: Product;
   productCategories = ProductData.ProductCategories;
   productSuppliers = ProductData.ProductSuppliers;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  addOnBlur = true;
+  removable = true;
+  selectable = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,6 +35,7 @@ export class ProductEditComponent {
     private router: Router,
     private productService: ProductService,
     private spinnerService: SpinnerService,
+    private snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {}
 
@@ -56,8 +64,38 @@ export class ProductEditComponent {
       price: [this.product.price, Validators.required],
       quantityInStock: [this.product.quantityInStock, Validators.required],
       category: [this.product.category, Validators.required],
-      supplier: [this.product.supplier, Validators.required]
+      supplier: [this.product.supplier, Validators.required],
+      tags: [this.product.tags || []],
+      sendCatalog: [this.product.sendCatalog || false]
     });
+  }
+
+  get tags() {
+    return this.productForm.get("tags");
+  }
+
+  addTag(event: MatChipInputEvent) {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || "").trim()) {
+      this.tags.value.push(value);
+      this.tags.markAsDirty();
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = "";
+    }
+  }
+
+  remove(tag: string): void {
+    const index = this.tags.value.indexOf(tag);
+    if (index >= 0) {
+      this.tags.value.splice(index, 1);
+      this.tags.markAsDirty();
+    }
   }
 
   displayTitle(): void {
@@ -84,7 +122,10 @@ export class ProductEditComponent {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.productService.deleteProduct(this.product.id).subscribe({
-            next: () => this.onSaveComplete(),
+            next: () => {
+              this.snackBar.open("Product Deleted.", null, { duration: 2000 });
+              this.onSaveComplete();
+            },
             error: err => console.log(err)
           });
         } else {
@@ -101,12 +142,18 @@ export class ProductEditComponent {
         this.spinnerService.setLoader(true);
         if (p.id === 0) {
           this.productService.createProduct(p).subscribe({
-            next: () => this.onSaveComplete(),
+            next: () => {
+              this.snackBar.open("Product Created.", null, { duration: 2000 });
+              this.onSaveComplete();
+            },
             error: err => console.log(err)
           });
         } else {
           this.productService.updateProduct(p).subscribe({
-            next: () => this.onSaveComplete(),
+            next: () => {
+              this.snackBar.open("Product Updated.", null, { duration: 2000 });
+              this.onSaveComplete();
+            },
             error: err => console.log(err)
           });
         }
