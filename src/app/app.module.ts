@@ -18,7 +18,7 @@ import { ProductEditComponent } from "./products/product-edit/product-edit.compo
 import { ConfirmationDialogComponent } from "./utitlity/confirmation/confirmation.component";
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
+export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
@@ -37,7 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
     }),
