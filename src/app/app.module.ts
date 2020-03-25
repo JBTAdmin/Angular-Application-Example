@@ -5,10 +5,7 @@ import { InMemoryWebApiModule } from "angular-in-memory-web-api";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import {
-  TranslateModule,
-  TranslateLoader  
-} from "@ngx-translate/core";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -21,8 +18,8 @@ import { ProductEditComponent } from "./products/product-edit/product-edit.compo
 import { ConfirmationDialogComponent } from "./utitlity/confirmation/confirmation.component";
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, "../assets/i18n/", ".json");
 }
 
 @NgModule({
@@ -40,7 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
     }),
