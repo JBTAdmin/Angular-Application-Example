@@ -48,7 +48,7 @@ export class ProductService {
 
   createProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
-    product.id = null;    
+    product.id = null;
     return this.http
       .post<Product>(this.productsUrl, product, { headers })
       .pipe(
@@ -91,7 +91,9 @@ export class ProductService {
       description: null,
       quantityInStock: null,
       category: Categories.Gaming,
-      supplier: 1
+      supplier: 1,
+      tags: [],
+      sendCatalog: false
     };
   }
 }
