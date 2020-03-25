@@ -2,7 +2,7 @@
 
 ## Demo
 
-[AngularApplicationExample](https://mistrykaran91.github.io/Angular-Application-Example/).
+[AngularApplicationExample](https://mistrykaran91.github.io/angular/).
 
 ## Install Dependencies
 
