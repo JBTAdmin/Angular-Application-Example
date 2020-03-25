@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "gh-pages-build" :"ng build --prod --base-href https://JBTAdmin.github.io/angular/",
-    "gh-pages-deploy" :"ng deploy --base-href https://JBTAdmin.github.io/angular/",
+    "gh-pages-deploy" :"ng deploy --base-href=/angular/",
     "gh-pages-prod-deploy":"npm run gh-pages-build && npm run gh-pages-deploy"
   },
   "private": true,
