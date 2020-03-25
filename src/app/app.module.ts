@@ -5,10 +5,7 @@ import { InMemoryWebApiModule } from "angular-in-memory-web-api";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import {
-  TranslateModule,
-  TranslateLoader  
-} from "@ngx-translate/core";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -22,7 +19,7 @@ import { ConfirmationDialogComponent } from "./utitlity/confirmation/confirmatio
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
 @NgModule({
