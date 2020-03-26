@@ -1,17 +1,18 @@
-<div class="mat-elevation-z8">
+<div class="table-container mat-elevation-z8">
   <table
     mat-table
     [dataSource]="products"
-    class="example-table"
     matSort
     matSortActive="productName"
     matSortDisableClear
     matSortDirection="asc"
+    [class.isMobile]="isMobile"
   >
     <!-- ID Column -->
     <ng-container matColumnDef="productCode">
       <th mat-header-cell *matHeaderCellDef>{{ "PRODUCT.ID" | translate }}</th>
       <td mat-cell *matCellDef="let row">
+        <span class="mobile-label">{{ "PRODUCT.ID" | translate }}</span>
         <a [routerLink]="[row.id]">
           {{ row.productCode }}
         </a>
@@ -23,7 +24,10 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
         {{ "PRODUCT.NAME" | translate }}
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.productName }}</td>
+      <td mat-cell *matCellDef="let row">
+        <span class="mobile-label">{{ "PRODUCT.NAME" | translate }}</span>
+        {{ row.productName }}
+      </td>
     </ng-container>
 
     <!-- Name Column -->
@@ -31,7 +35,10 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
         {{ "PRODUCT.PRICE" | translate }}
       </th>
-      <td mat-cell *matCellDef="let row">{{ row.price | currency }}</td>
+      <td mat-cell *matCellDef="let row">
+        <span class="mobile-label">{{ "PRODUCT.PRICE" | translate }}</span>
+        {{ row.price | currency }}
+      </td>
     </ng-container>
 
     <!-- Color Column -->
@@ -40,6 +47,9 @@
         {{ "PRODUCT.QTY_IN_STOCK" | translate }}
       </th>
       <td mat-cell *matCellDef="let row">
+        <span class="mobile-label">
+          {{ "PRODUCT.QTY_IN_STOCK" | translate }}</span
+        >
         {{ row.quantityInStock | currency }}
       </td>
     </ng-container>

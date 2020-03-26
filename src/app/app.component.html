@@ -1,26 +1,25 @@
 <mat-toolbar color="primary">
-  <div fxFlex="80">
-    <ul fxFlex="row" fxLayoutGap="22px" class="navigation-items">
-      <li>
-        <a>LOGO</a>
-      </li>
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="sidenav.toggle()" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
 
-      <li>
-        <button mat-stroked-button routerLink="">
-          {{ "PRODUCT.LIST" | translate }}
-        </button>
-      </li>
+    <span fxHide.gt-sm>LOGO</span>
 
-      <li>
-        <button mat-stroked-button routerLink="0/edit">
-          {{ "PRODUCT.ADD" | translate }}
-        </button>
-      </li>
-    </ul>
-  </div>
-  <div fxFlex="20">
-    <div class="lang-select">
-      <mat-form-field>
+    <div fxLayoutAlign="start baseline" fxShow="true" fxHide.lt-md>
+      <a mat-button>
+        LOGO
+      </a>
+
+      <a mat-button (click)="onListProduct()">
+        {{ "PRODUCT.LIST" | translate }}
+      </a>
+
+      <a mat-button (click)="onAddProduct()">
+        {{ "PRODUCT.ADD" | translate }}
+      </a>
+
+      <mat-form-field class="lang-select">
         <mat-select
           [(ngModel)]="language"
           (selectionChange)="onLanguageChange()">
@@ -32,10 +31,38 @@
         </mat-select>
       </mat-form-field>
     </div>
-  </div>
+  </mat-toolbar-row>
 </mat-toolbar>
+
 <div *ngIf="loading$ | async">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
-<router-outlet></router-outlet>
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a (click)="sidenav.toggle()" mat-list-item>Close</a>
+      <a mat-list-item (click)="onListProduct()">
+        {{ "PRODUCT.LIST" | translate }}
+      </a>
+      <a mat-list-item (click)="onAddProduct()">
+        {{ "PRODUCT.ADD" | translate }}
+      </a>
+
+      <mat-form-field mat-list-item>
+        <mat-select
+          [(ngModel)]="language"
+          (selectionChange)="onLanguageChange()">
+          <mat-option
+            *ngFor="let language of languages"
+            [value]="language.code">
+            {{ "LANGUAGE." + language.name | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,3 +1,4 @@
+import { MatDialog } from "@angular/material/dialog";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError, of } from "rxjs";
@@ -5,6 +6,12 @@ import { catchError, tap, map } from "rxjs/operators";
 
 import { Product } from "./product";
 import { Categories } from "./product-data";
+import {
+  ConfirmationDialogComponent,
+  Confirmation
+} from "../utitlity/confirmation/confirmation.component";
+import { TranslateService } from "@ngx-translate/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: "root"
@@ -12,7 +19,12 @@ import { Categories } from "./product-data";
 export class ProductService {
   private productsUrl = "api/products";
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    public dialog: MatDialog,
+    private translate: TranslateService,
+    private snackBar: MatSnackBar
+  ) {}
 
   // Real http call can use this active, direction and pageIndex sort option
   getProducts(
@@ -81,7 +93,44 @@ export class ProductService {
       );
   }
 
-  private initializeProduct(): Product {
+  deleteProductOnConfirm(product: Product) {
+    return new Promise((resolve, reject) => {
+      if (product.id === 0) {
+        // Don't delete, it was never saved.
+        resolve(true);
+      } else {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          width: "250px",
+          data: {
+            message:
+              this.translate.instant("PRODUCT.DELETE.CONFIRMATION") +
+              `: ${product.productName}?`
+          } as Confirmation
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            this.deleteProduct(product.id).subscribe({
+              next: () => {
+                const deleteConfirmation = this.translate.instant(
+                  "PRODUCT.DELETED"
+                );
+                this.snackBar.open(deleteConfirmation, null, {
+                  duration: 2000
+                });
+                resolve(true);
+              },
+              error: err => {
+                reject(false);
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+  public initializeProduct(): Product {
     // Return an initialized object
     return {
       id: 0,

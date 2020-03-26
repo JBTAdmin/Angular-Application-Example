@@ -1,6 +1,10 @@
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS
+} from "@angular/common/http";
 import { InMemoryWebApiModule } from "angular-in-memory-web-api";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -16,6 +20,7 @@ import { ProductListComponent } from "./products/product-list/product-list.compo
 import { ProductDetailComponent } from "./products/product-detail/product-detail.component";
 import { ProductEditComponent } from "./products/product-edit/product-edit.component";
 import { ConfirmationDialogComponent } from "./utitlity/confirmation/confirmation.component";
+import { HttpConfigInterceptor } from "./services/http-config.interceptor";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -52,7 +57,9 @@ export function createTranslateLoader(http: HttpClient) {
       delay: 1000
     })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

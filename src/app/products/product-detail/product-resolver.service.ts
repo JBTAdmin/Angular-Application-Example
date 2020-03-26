@@ -10,16 +10,12 @@ import { map, catchError } from "rxjs/operators";
 
 import { ProductResolved } from "../product";
 import { ProductService } from "../product.service";
-import { SpinnerService } from "../../services/spinner.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProductResolver implements Resolve<ProductResolved> {
-  constructor(
-    private productService: ProductService,
-    private spinnerService: SpinnerService
-  ) {}
+  constructor(private productService: ProductService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -31,10 +27,9 @@ export class ProductResolver implements Resolve<ProductResolved> {
       console.error(message);
       return of({ product: null, error: message });
     }
-    this.spinnerService.setLoader(true);
+
     return this.productService.getProduct(+id).pipe(
       map(product => {
-        this.spinnerService.setLoader(false);
         return { product: product };
       }),
       catchError(error => {

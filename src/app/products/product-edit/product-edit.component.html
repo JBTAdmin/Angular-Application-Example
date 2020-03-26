@@ -1,6 +1,10 @@
 <mat-card class="example-card">
   <mat-card-header>
-    {{ displayTitle }}
+    {{
+      (product && product.id)
+        ? ("PRODUCT.EDIT_DETAIL" | translate) + ": " + product?.productName
+        : ("PRODUCT.ADD" | translate)
+    }}
   </mat-card-header>
 
   <mat-card-content *ngIf="product">
