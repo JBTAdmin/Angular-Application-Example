@@ -57,18 +57,24 @@ export class PersonEditComponent {
         [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
       ],
       address: [this.person.address, Validators.required],
-      qualification: [
-        this.person.qualification,
-        [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
-      ],
+      qualification: [this.person.qualification, [Validators.required]],
       gender: [this.person.gender, Validators.required],
       dob: [this.person.dob, Validators.required],
-      age: [this.calculatedAge],
+      age: { value: this.calculatedAge, disabled: true },
       personRoles: [this.person.personRoles, Validators.required],
       height: [this.person.height, Validators.required],
       email: [this.person.email || []],
       enteredEmail: [""]
     });
+  }
+
+  onDateChange(event) {
+    if (event) {
+      this.calculatedAge = calculateAge(event.value);
+      this.personForm.get("age").enable();
+      this.personForm.get("age").setValue(this.calculatedAge);
+      this.personForm.get("age").disable();
+    }
   }
 
   get emails() {

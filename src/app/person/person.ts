@@ -3,9 +3,14 @@ import { Role } from "../enums/role.enum";
 
 export const calculateAge = birthday => {
   // birthday is a date
+
+  if (!birthday) {
+    return null;
+  }
+
   birthday = new Date(birthday);
 
-  if (birthday && birthday instanceof Date) {
+  if (birthday instanceof Date) {
     const ageDifMs = Date.now() - birthday.getTime();
     const ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
