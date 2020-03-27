@@ -1,0 +1,15 @@
+.detail-header {
+  color: #673ab7;
+}
+
+mat-card {
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  mat-card {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,28 @@
+.productform {
+  width: 66%;
+  padding: 0px 15px;
+}
+
+mat-card {
+  width: 70%;
+  margin: 0 auto;
+}
+
+mat-selection-list {
+  display: flex;
+
+  .mat-list-item-content {
+    flex-direction: none;
+  }
+
+  .mat-list-option {
+    width: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  mat-card {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

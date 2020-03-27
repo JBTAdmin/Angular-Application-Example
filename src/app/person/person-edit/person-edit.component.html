@@ -1,0 +1,148 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    {{
+      person && person.id
+        ? ("PERSON.EDIT_DETAIL" | translate) + ": " + person?.name
+        : ("PERSON.ADD" | translate)
+    }}
+  </mat-card-header>
+
+  <mat-card-content *ngIf="person">
+    <form novalidate [formGroup]="personForm">
+      <div fxLayout="column">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="{{ 'PERSON.NAME' | translate }}"
+            formControlName="name"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="{{ 'PERSON.ADDRESS' | translate }}"
+            formControlName="address"
+          ></textarea>
+        </mat-form-field>
+
+        <mat-label>{{ "PERSON.GENDER" | translate }}</mat-label>
+        <mat-radio-group
+          color="primary"
+          name="gender"
+          fxLayoutGap="10px"
+          formControlName="gender"
+        >
+          <mat-radio-button [value]="Gender.Male"
+            >{{ Gender.Male }}
+          </mat-radio-button>
+          <mat-radio-button [value]="Gender.Female"
+            >{{ Gender.Female }}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>DOB</mat-label>
+          <input matInput [max]="maxDate" [matDatepicker]="picker" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            placeholder="{{ 'PERSON.AGE' | translate }}"
+            formControlName="age"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{ "PERSON.QUALIFICATION" | translate }}</mat-label>
+          <mat-select formControlName="qualification">
+            <mat-option
+              *ngFor="let qualification of qualifications"
+              [value]="qualification"
+              >{{ qualification }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <mat-label>{{ "PERSON.ROLE" | translate }}</mat-label>
+        <mat-selection-list formControlName="personRoles">
+          <mat-list-option
+            [value]="personRole.User"
+            checkboxPosition="before"
+            >{{ personRole.User }}</mat-list-option
+          >
+          <mat-list-option
+            [value]="personRole.Admin"
+            checkboxPosition="before"
+            >{{ personRole.Admin }}</mat-list-option
+          >
+        </mat-selection-list>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            placeholder="{{ 'PERSON.HEIGHT' | translate }}"
+            formControlName="height"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput            
+            formControlName="enteredEmail"
+            type="email"
+            placeholder="{{ 'PERSON.EMAIL' | translate }}"
+            [matChipInputFor]="emailChipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="addEmail($event)"
+            email            
+          />
+        </mat-form-field>
+
+        <mat-chip-list #emailChipList aria-label="Email">
+          <mat-chip
+            *ngFor="let email of personForm.get('email').value"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(email)"
+          >
+            {{ email }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      (click)="savePerson()"
+      [disabled]="!personForm?.valid"
+    >
+      {{ "PERSON.SAVE" | translate }}
+    </button>
+
+    <button
+      type="button"
+      mat-raised-button
+      color="warn"
+      (click)="deletePerson()"
+    >
+      {{ "PERSON.DELETE" | translate }}
+    </button>
+    <button type="button" mat-raised-button [routerLink]="['']">
+      {{ "PERSON.CANCEL" | translate }}
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -12,7 +12,9 @@ export class MessageService {
   ) {}
 
   showMessage(message: string, isTranslatable: boolean = true): void {
-    const translatedMessage = this.translateService.instant("PRODUCT.UPDATED");
+    const translatedMessage = isTranslatable
+      ? this.translateService.instant(message)
+      : message;
     this.snackBar.open(translatedMessage, null, { duration: 2000 });
   }
 }

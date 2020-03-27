@@ -21,6 +21,9 @@ import { ProductDetailComponent } from "./products/product-detail/product-detail
 import { ProductEditComponent } from "./products/product-edit/product-edit.component";
 import { ConfirmationDialogComponent } from "./utitlity/confirmation/confirmation.component";
 import { HttpConfigInterceptor } from "./services/http-config.interceptor";
+import { PersonListComponent } from "./person/person-list/person-list.component";
+import { PersonDetailComponent } from "./person/person-detail/person-detail.component";
+import { PersonEditComponent } from "./person/person-edit/person-edit.component";
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -33,6 +36,9 @@ export function createTranslateLoader(http: HttpClient) {
     ProductListComponent,
     ProductDetailComponent,
     ProductEditComponent,
+    PersonListComponent,
+    PersonDetailComponent,
+    PersonEditComponent,
     ConfirmationDialogComponent
   ],
   entryComponents: [ConfirmationDialogComponent],

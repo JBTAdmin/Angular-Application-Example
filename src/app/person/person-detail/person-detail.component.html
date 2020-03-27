@@ -1,0 +1,95 @@
+<mat-card class="example-card">
+  <mat-card-header color="primary" fxLayout="row" fxLayoutAlign="center center">
+    <h3 class="detail-header">
+      {{
+        person && person.id
+          ? ("PERSON.DETAIL" | translate) + ": " + person.name
+          : ("PERSON.NOT_FOUND" | translate)
+      }}
+    </h3>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">{{ "PERSON.NAME" | translate }}</h4>
+        <p fxFlex="50">{{ person.name }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">{{ "PERSON.ADDRESS" | translate }}</h4>
+        <p fxFlex="50">{{ person.address }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">{{ "PERSON.GENDER" | translate }}</h4>
+        <p fxFlex="50">{{ person.gender }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">{{ "PERSON.DOB" | translate }}</h4>
+        <p fxFlex="50">{{ person.dob | date }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">{{ "PERSON.AGE" | translate }}</h4>
+        <p fxFlex="50">{{ calculatedAge }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">{{ "PERSON.QUALIFICATION" | translate }}</h4>
+        <p fxFlex="50">{{ person.qualification }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">{{ "PERSON.ROLE" | translate }}</h4>
+        <p fxFlex="50">{{ person.personRoles }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">{{ "PERSON.HEIGHT" | translate }}</h4>
+        <p fxFlex="50">{{ person.height }}</p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon color="primary" mat-list-icon>keyboard_arrow_right</mat-icon>
+        <h4 fxFlex="50">{{ "PERSON.EMAIL" | translate }}</h4>
+        <mat-chip-list aria-label="Emails">
+          <mat-chip *ngFor="let email of person.email || []">{{
+            email
+          }}</mat-chip>
+        </mat-chip-list>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      [routerLink]="['edit']"
+    >
+      {{ "PERSON.EDIT" | translate }}
+    </button>
+
+    <button
+      type="button"
+      mat-raised-button
+      color="warn"
+      (click)="deletePerson()"
+    >
+      {{ "PERSON.DELETE" | translate }}
+    </button>
+    <button type="button" mat-raised-button [routerLink]="['']">
+      {{ "PERSON.CANCEL" | translate }}
+    </button>
+  </mat-card-actions>
+</mat-card>
