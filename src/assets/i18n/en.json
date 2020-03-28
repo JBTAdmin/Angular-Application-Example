@@ -25,5 +25,18 @@
   "PRODUCT.SAVED" :"Product Saved",
   "PRODUCT.UPDATED" :"Product Updated",
   "PRODUCT.NO" :"No",
-  "PRODUCT.YES" : "Yes"
+  "PRODUCT.YES" : "Yes",
+  "PERSON.NAME": "Name",
+  "PERSON.ADDRESS": "Address",
+  "PERSON.GENDER": "Gender",
+  "PERSON.AGE": "Age",
+  "PERSON.QUALIFICATION": "Qualification",
+  "PERSON.ROLE": "Roles",
+  "PERSON.HEIGHT": "Height",
+  "PERSON.EMAIL": "Email",
+  "PERSON.SAVE": "Save",
+  "PERSON.DELETE": "Delete",
+  "PERSON.CANCEL": "Cancel",
+  "PERSON.ADD": "Add Person",
+  "PERSON.LIST": "List Person"
 }
